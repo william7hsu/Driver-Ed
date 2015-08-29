@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 public class getJson {
 
     public static void main(String[] args) throws IOException {
+
         boolean isA = true;
         boolean isB = false;
         boolean isC = false;
@@ -19,32 +20,32 @@ public class getJson {
         if (isB == true) {
             scode = "HARD_BRAKE";
         }
-        StringBuilder urlBuilder = new StringBuilder("https://developer.gm.com/api/v1/fleet/vehicles/{vin}/data/services/{service_code}".replace("{vin}", URLEncoder.encode("1G6DH5E53C0000003", "UTF-8")).replace("{service_code}", URLEncoder.encode(scode, "UTF-8")));
-        urlBuilder.append("?");
-        urlBuilder.append(URLEncoder.encode("from", "UTF-8") + "=" + URLEncoder.encode("2011-10-05T18:00:00.000Z", "UTF-8") + "&");
-        urlBuilder.append(URLEncoder.encode("to", "UTF-8") + "=" + URLEncoder.encode("2014-10-05T19:00:00.000Z", "UTF-8") + "&");
-        urlBuilder.append(URLEncoder.encode("offet", "UTF-8") + "=" + URLEncoder.encode("0", "UTF-8") + "&");
-        urlBuilder.append(URLEncoder.encode("limit", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8"));
-        URL url = new URL(urlBuilder.toString());
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Accept", "application/xml");
-        conn.setRequestProperty("Authorization", "Bearer 676c2a4b-5ed2-45ff-a7d0-44575a4c011e");
-        System.out.println("Response code: " + conn.getResponseCode());
-        BufferedReader rd;
-        if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        } else {
-            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-        }
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            sb.append(line);
-        }
-        rd.close();
-        conn.disconnect();
-        System.out.println(sb.toString());
+            StringBuilder urlBuilder = new StringBuilder("https://developer.gm.com/api/v1/fleet/vehicles/{vin}/data/services/{service_code}".replace("{vin}", URLEncoder.encode("1G6DH5E53C0000003", "UTF-8")).replace("{service_code}", URLEncoder.encode(scode, "UTF-8")));
+            urlBuilder.append("?");
+            urlBuilder.append(URLEncoder.encode("from","UTF-8") + "=" + URLEncoder.encode("2011-10-05T18:00:00.000Z", "UTF-8") + "&");
+            urlBuilder.append(URLEncoder.encode("to","UTF-8") + "=" + URLEncoder.encode("2011-10-05T19:00:00.000Z", "UTF-8") + "&");
+            urlBuilder.append(URLEncoder.encode("offet","UTF-8") + "=" + URLEncoder.encode("0", "UTF-8") + "&");
+            urlBuilder.append(URLEncoder.encode("limit","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8"));
+            URL url = new URL(urlBuilder.toString());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/xml");
+            conn.setRequestProperty("Authorization", "Bearer ae60098a-dbff-48a8-9a06-18b6459bfb19");
+            System.out.println("Response code: " + conn.getResponseCode());
+            BufferedReader rd;
+            if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                sb.append(line);
+            }
+            rd.close();
+            conn.disconnect();
+            System.out.println(sb.toString());
         String s = sb.toString();
         String f = sb.toString();
         int index = s.indexOf("HardBrake");
